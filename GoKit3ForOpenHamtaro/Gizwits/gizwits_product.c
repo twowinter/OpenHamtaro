@@ -12,7 +12,7 @@
 
 extern volatile gizwitsReport_t reportData;
 
-//custom ä¸‹è¾¾æ•°æ®åˆ†æå¹¶å¤„ç†å‡½æ•°
+//custom ÏÂ´ïÊı¾İ·ÖÎö²¢´¦Àíº¯Êı
 int8_t eventProcess(eventInfo_t *info, uint8_t *data, uint32_t len)
 {
     uint8_t i = 0;
@@ -143,7 +143,7 @@ void TIMER_IRQ_FUN(void)
 /*******************************************************************************
 * Function Name  : timerInit
 * Description    : timer initialization function
-* Input          : arr é‡è£…åˆå€¼   psc é¢„åˆ†é¢‘
+* Input          : arr ÖØ×°³õÖµ   psc Ô¤·ÖÆµ
 * Output         : None
 * Return         : None
 * Attention      : None
@@ -155,24 +155,24 @@ void timerInit(void)
     TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
     NVIC_InitTypeDef NVIC_InitStructure;
 
-    RCC_APB1PeriphClockCmd(TIMER_RCC, ENABLE); //æ—¶é’Ÿä½¿èƒ½
+    RCC_APB1PeriphClockCmd(TIMER_RCC, ENABLE); //Ê±ÖÓÊ¹ÄÜ
 
-    //å®šæ—¶å™¨TIM3åˆå§‹åŒ–
-    TIM_TimeBaseStructure.TIM_Period = arr; //è®¾ç½®åœ¨ä¸‹ä¸€ä¸ªæ›´æ–°äº‹ä»¶è£…å…¥æ´»åŠ¨çš„è‡ªåŠ¨é‡è½½å¯„å­˜å™¨å‘¨æœŸçš„å€¼
-    TIM_TimeBaseStructure.TIM_Prescaler =psc; //è®¾ç½®ç”¨æ¥ä½œä¸ºTIMxæ—¶é’Ÿé¢‘ç‡çš„é¢„åˆ†é¢‘å€¼
-    TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1; //è®¾ç½®æ—¶é’Ÿåˆ†å‰²:TDTS = Tck_tim
-    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  //TIMå‘ä¸Šè®¡æ•°æ¨¡å¼
-    TIM_TimeBaseInit(TIMER, &TIM_TimeBaseStructure); //æ ¹æ®æŒ‡å®šçš„å‚æ•°åˆå§‹åŒ–TIMxçš„æ—¶é—´åŸºæ•°å•ä½0
+    //¶¨Ê±Æ÷TIM3³õÊ¼»¯
+    TIM_TimeBaseStructure.TIM_Period = arr; //ÉèÖÃÔÚÏÂÒ»¸ö¸üĞÂÊÂ¼ş×°Èë»î¶¯µÄ×Ô¶¯ÖØÔØ¼Ä´æÆ÷ÖÜÆÚµÄÖµ
+    TIM_TimeBaseStructure.TIM_Prescaler =psc; //ÉèÖÃÓÃÀ´×÷ÎªTIMxÊ±ÖÓÆµÂÊµÄÔ¤·ÖÆµÖµ
+    TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1; //ÉèÖÃÊ±ÖÓ·Ö¸î:TDTS = Tck_tim
+    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  //TIMÏòÉÏ¼ÆÊıÄ£Ê½
+    TIM_TimeBaseInit(TIMER, &TIM_TimeBaseStructure); //¸ù¾İÖ¸¶¨µÄ²ÎÊı³õÊ¼»¯TIMxµÄÊ±¼ä»ùÊıµ¥Î»0
 
-    TIM_ITConfig(TIMER, TIM_IT_Update,ENABLE ); //ä½¿èƒ½æŒ‡å®šçš„TIM3ä¸­æ–­,å…è®¸æ›´æ–°ä¸­æ–­
+    TIM_ITConfig(TIMER, TIM_IT_Update,ENABLE ); //Ê¹ÄÜÖ¸¶¨µÄTIM3ÖĞ¶Ï,ÔÊĞí¸üĞÂÖĞ¶Ï
 
-    //ä¸­æ–­ä¼˜å…ˆçº§NVICè®¾ç½®
-    NVIC_InitStructure.NVIC_IRQChannel = TIMER_IRQ;  //TIM3ä¸­æ–­
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;  //ä¼˜å ä¼˜å…ˆçº§0çº§
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;  //ä»ä¼˜å…ˆçº§3çº§
-    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //IRQé€šé“è¢«ä½¿èƒ½
-    NVIC_Init(&NVIC_InitStructure);  //åˆå§‹åŒ–NVICå¯„å­˜å™¨
-    TIM_Cmd(TIMER, ENABLE);  //ä½¿èƒ½TIMx
+    //ÖĞ¶ÏÓÅÏÈ¼¶NVICÉèÖÃ
+    NVIC_InitStructure.NVIC_IRQChannel = TIMER_IRQ;  //TIM3ÖĞ¶Ï
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;  //ÓÅÕ¼ÓÅÏÈ¼¶0¼¶
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;  //´ÓÓÅÏÈ¼¶3¼¶
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //IRQÍ¨µÀ±»Ê¹ÄÜ
+    NVIC_Init(&NVIC_InitStructure);  //³õÊ¼»¯NVIC¼Ä´æÆ÷
+    TIM_Cmd(TIMER, ENABLE);  //Ê¹ÄÜTIMx
 }
 
 /**
@@ -191,7 +191,7 @@ void UART_IRQ_FUN(void)
 }
 
 
-//custom ä¸²å£å†™æ“ä½œï¼Œå‘é€æ•°æ®åˆ°WiFiæ¨¡ç»„
+//custom ´®¿ÚĞ´²Ù×÷£¬·¢ËÍÊı¾İµ½WiFiÄ£×é
 int8_t uartWrite(uint8_t *buf, uint32_t len)
 {
     uint32_t i = 0;
@@ -252,9 +252,9 @@ void uartInit(void)
 
     USART_ITConfig(UART,USART_IT_RXNE,ENABLE);
     USART_Cmd(UART, ENABLE);
-    USART_ClearFlag(UART, USART_FLAG_TC); /*æ¸…ç©ºå‘é€å®Œæˆæ ‡å¿—,Transmission Complete flag */
+    USART_ClearFlag(UART, USART_FLAG_TC); /*Çå¿Õ·¢ËÍÍê³É±êÖ¾,Transmission Complete flag */
 
-    /*ä½¿èƒ½ä¸²å£ä¸­æ–­,å¹¶è®¾ç½®ä¼˜å…ˆçº§*/
+    /*Ê¹ÄÜ´®¿ÚÖĞ¶Ï,²¢ÉèÖÃÓÅÏÈ¼¶*/
     NVIC_InitStructure.NVIC_IRQChannel = UART_IRQ;
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;

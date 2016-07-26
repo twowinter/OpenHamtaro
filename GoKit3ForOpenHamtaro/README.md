@@ -7,6 +7,11 @@ Hello!
 
 2016-07-19 作者：twowinter  
 更新信息：  
+1.将GoKit3ForOpenHamtaro\Gizwits目录下文件UTF-8编码转为ANSI编码，解决SI等编辑器中文乱码问题；   
+2.上传机智云数据点文档；   
+
+2016-07-19 作者：twowinter  
+更新信息：  
 1.上传《微信宠物屋 for GoKit 2 STM V03010100》2016.7.19 15:58版本为基础版本；    
 
 

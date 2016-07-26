@@ -6,7 +6,7 @@
 
 #define min(a, b) (a)<(b)?(a):(b)
 
-/** ç¯å½¢ç¼“å†²åŒºå˜é‡å®šä¹‰ **/
+/** »·ĞÎ»º³åÇø±äÁ¿¶¨Òå **/
 typedef struct {
     size_t rbCapacity;
     char  *rbHead;
@@ -18,9 +18,9 @@ rb_t pRb;
 
 static char rbBuf[MAX_RINGBUFFER_LEN];
 
-/** åè®®å…¨å±€å˜é‡ **/
+/** Ğ­ÒéÈ«¾Ö±äÁ¿ **/
 gizwitsProtocol_t gizwitsProtocol;
-extern volatile gizwitsReport_t reportData;//ä¸ŠæŠ¥æ•°æ®ç»“æ„ä½“
+extern volatile gizwitsReport_t reportData;//ÉÏ±¨Êı¾İ½á¹¹Ìå
 
 static void rbCreate(rb_t* rb)
 {
@@ -219,13 +219,13 @@ uint16_t protocolExchangeBytes(uint16_t value)
 }
 
 /**
-* @brief Data Type Conversions x : è½¬åŒ–ä¸ºåè®®ä¸­çš„xå€¼åŠå®é™…é€šè®¯ä¼ è¾“çš„å€¼
+* @brief Data Type Conversions x : ×ª»¯ÎªĞ­ÒéÖĞµÄxÖµ¼°Êµ¼ÊÍ¨Ñ¶´«ÊäµÄÖµ
 *
-* @param ratio : ä¿®æ­£ç³»æ•°k
-* @param addition : å¢é‡m
-* @param preValue : ä½œä¸ºåè®®ä¸­çš„yå€¼, æ˜¯App UIç•Œé¢çš„æ˜¾ç¤ºå€¼
+* @param ratio : ĞŞÕıÏµÊık
+* @param addition : ÔöÁ¿m
+* @param preValue : ×÷ÎªĞ­ÒéÖĞµÄyÖµ, ÊÇApp UI½çÃæµÄÏÔÊ¾Öµ
 *
-* @return uint16_t aft_value : ä½œä¸ºåè®®ä¸­çš„xå€¼, æ˜¯å®é™…é€šè®¯ä¼ è¾“çš„å€¼
+* @return uint16_t aft_value : ×÷ÎªĞ­ÒéÖĞµÄxÖµ, ÊÇÊµ¼ÊÍ¨Ñ¶´«ÊäµÄÖµ
 */
 uint32_t Y2X(uint32_t ratio, int32_t addition, int32_t preValue)
 {
@@ -238,13 +238,13 @@ uint32_t Y2X(uint32_t ratio, int32_t addition, int32_t preValue)
 }
 
 /**
-* @brief Data Type Conversions y : è½¬åŒ–ä¸ºåè®®ä¸­çš„yå€¼åŠApp UIç•Œé¢çš„æ˜¾ç¤ºå€¼
+* @brief Data Type Conversions y : ×ª»¯ÎªĞ­ÒéÖĞµÄyÖµ¼°App UI½çÃæµÄÏÔÊ¾Öµ
 *
-* @param ratio : ä¿®æ­£ç³»æ•°k
-* @param addition : å¢é‡m
-* @param preValue : ä½œä¸ºåè®®ä¸­çš„xå€¼, æ˜¯å®é™…é€šè®¯ä¼ è¾“çš„å€¼
+* @param ratio : ĞŞÕıÏµÊık
+* @param addition : ÔöÁ¿m
+* @param preValue : ×÷ÎªĞ­ÒéÖĞµÄxÖµ, ÊÇÊµ¼ÊÍ¨Ñ¶´«ÊäµÄÖµ
 *
-* @return int16_t : ä½œä¸ºåè®®ä¸­çš„yå€¼, æ˜¯App UIç•Œé¢çš„æ˜¾ç¤ºå€¼
+* @return int16_t : ×÷ÎªĞ­ÒéÖĞµÄyÖµ, ÊÇApp UI½çÃæµÄÏÔÊ¾Öµ
 */
 int32_t X2Y(uint32_t ratio, int32_t addition, uint32_t preValue)
 {
@@ -572,7 +572,7 @@ int8_t protocolCommonAck(protocolHead_t *buf)
     ret = uartWrite((uint8_t *)&ack, sizeof(protocolCommon_t));
     if(ret < 0)
     {
-        //æ‰“å°æ—¥å¿—
+        //´òÓ¡ÈÕÖ¾
         GIZWITS_LOG("ERROR: uart write error %d \r\n", ret);
     }
 
@@ -585,7 +585,7 @@ void protocolAckHandle(void)
     {
         if(SEND_MAX_NUM >= gizwitsProtocol.waitAck.num)
         {
-            //200msæœªæ”¶åˆ°ACKé‡å‘
+            //200msÎ´ÊÕµ½ACKÖØ·¢
             if(SEND_MAX_TIME < (gizwitsGetTimerCount() - gizwitsProtocol.waitAck.sendTime))
             {
                 GIZWITS_LOG("Warning:protocolResendData %d %d %d\r\n", gizwitsGetTimerCount(), gizwitsProtocol.waitAck.sendTime, gizwitsProtocol.waitAck.num);
@@ -621,7 +621,7 @@ int8_t protocolGetDeviceInfo(protocolHead_t * head)
     ret = uartWrite((uint8_t *)&deviceInfo, sizeof(protocolDeviceInfo_t));
     if(ret < 0)
     {
-        //æ‰“å°æ—¥å¿—
+        //´òÓ¡ÈÕÖ¾
         GIZWITS_LOG("ERROR: uart write error %d \r\n", ret);
     }
     
@@ -863,7 +863,7 @@ uint8_t gizwitsSetDefault(void)
     ret = uartWrite((uint8_t *)&setDefault, sizeof(protocolCommon_t));
     if(ret < 0)
     {
-        //æ‰“å°æ—¥å¿—
+        //´òÓ¡ÈÕÖ¾
         GIZWITS_LOG("ERROR: uart write error %d \r\n", ret);
     }
 
@@ -886,7 +886,7 @@ uint8_t gizwitsSetMode(uint8_t mode)
     ret = uartWrite((uint8_t *)&cfgMode, sizeof(protocolCfgMode_t));
     if(ret < 0)
     {
-        //æ‰“å°æ—¥å¿—
+        //´òÓ¡ÈÕÖ¾
         GIZWITS_LOG("ERROR: uart write error %d \r\n", ret);
     }
 
@@ -933,7 +933,7 @@ uint8_t protocolIssuedDataAck(protocolHead_t *head, uint8_t *data, uint32_t len)
     ret = uartWrite(ptrData, dataLen);
     if(ret < 0)
     {
-        //æ‰“å°æ—¥å¿—
+        //´òÓ¡ÈÕÖ¾
         GIZWITS_LOG("ERROR: protocolIssuedDataAck uart write error %d dataLen %d \r\n", ret, dataLen);
     }
 
@@ -956,7 +956,7 @@ uint8_t gizwitsReportData(uint8_t action, uint8_t *data, uint32_t len)
     ret = uartWrite((uint8_t *)&protocolReport, sizeof(protocolReport_t));
     if(ret < 0)
     {
-        //æ‰“å°æ—¥å¿—
+        //´òÓ¡ÈÕÖ¾
         GIZWITS_LOG("ERROR: uart write error %d \r\n", ret);
     }
 
@@ -982,7 +982,7 @@ uint8_t protocolErrorCmd(protocolHead_t *head,errorPacketsType_t errno)
     ret = uartWrite((uint8_t *)&errorType, sizeof(protocolErrorType_t));
     if(ret < 0)
     {
-        //æ‰“å°æ—¥å¿—
+        //´òÓ¡ÈÕÖ¾
         GIZWITS_LOG("ERROR: uart write error %d \r\n", ret);
     }
 
@@ -991,7 +991,7 @@ uint8_t protocolErrorCmd(protocolHead_t *head,errorPacketsType_t errno)
 
 /*******************************************************************************
 * Function Name  : protocolReboot
-* Description    : WiFiæ¨¡ç»„è¯·æ±‚å¤ä½è®¾å¤‡MCUï¼ŒMCUå›å¤ACKï¼Œå¹¶æ‰§è¡Œè®¾å¤‡å¤ä½
+* Description    : WiFiÄ£×éÇëÇó¸´Î»Éè±¸MCU£¬MCU»Ø¸´ACK£¬²¢Ö´ĞĞÉè±¸¸´Î»
 * Input          : None
 * Output         : None
 * Return         : None
@@ -1017,7 +1017,7 @@ void gizwitsHandle(gizwitsReport_t *reportData)
     uint32_t ackLen = 0;
     protocolHead_t *recvHead = NULL;
     
-    /*é‡å‘æœºåˆ¶*/
+    /*ÖØ·¢»úÖÆ*/
     protocolAckHandle();
     ret = protocolGetOnePacket(&pRb, gizwitsProtocol.protocolBuf, &protocolLen);
 
@@ -1075,7 +1075,7 @@ void gizwitsHandle(gizwitsReport_t *reportData)
     }
     else if(-2 == ret)
     {
-        //æ ¡éªŒå¤±è´¥ï¼ŒæŠ¥å‘Šå¼‚å¸¸
+        //Ğ£ÑéÊ§°Ü£¬±¨¸æÒì³£
         protocolErrorCmd(recvHead,ERROR_ACK_SUM);
         GIZWITS_LOG("ERROR: check sum error!\r\n");
         return;

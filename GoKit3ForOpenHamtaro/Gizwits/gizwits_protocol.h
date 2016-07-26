@@ -13,10 +13,10 @@
 #define SoftAp_Mode    0x01
 #define AirLink_Mode   0x02
 
-#define MAX_P0_LEN      128              //p0æ•°æ®æœ€å¤§é•¿åº¦
-#define MAX_PACKAGE_LEN     (MAX_P0_LEN*2)   //æ•°æ®ç¼“å†²åŒºæœ€å¤§é•¿åº¦
-#define MAX_RINGBUFFER_LEN  MAX_PACKAGE_LEN  //ç¯å½¢ç¼“å†²åŒºæœ€å¤§é•¿åº¦
-#define Max_UartBuf         MAX_PACKAGE_LEN  //ä¸²å£æ•°æ®ç¼“å†²åŒºæœ€å¤§é•¿åº¦
+#define MAX_P0_LEN      128              //p0Êı¾İ×î´ó³¤¶È
+#define MAX_PACKAGE_LEN     (MAX_P0_LEN*2)   //Êı¾İ»º³åÇø×î´ó³¤¶È
+#define MAX_RINGBUFFER_LEN  MAX_PACKAGE_LEN  //»·ĞÎ»º³åÇø×î´ó³¤¶È
+#define Max_UartBuf         MAX_PACKAGE_LEN  //´®¿ÚÊı¾İ»º³åÇø×î´ó³¤¶È
 
 #define SEND_MAX_TIME   3000 //3000ms
 #define SEND_MAX_NUM    2
@@ -159,7 +159,7 @@ __packed typedef struct {
 }moduleStatusInfo_t;
 
 //protocol
-/*å‘½ä»¤ç */
+/*ÃüÁîÂë*/
 __packed typedef enum
 {
     CMD_GET_DEVICE_INTO             = 0x01,
@@ -194,19 +194,19 @@ __packed typedef enum
 
 
 /******************************************************
-* é‡å‘æœºåˆ¶ç»“æ„ä½“
+* ÖØ·¢»úÖÆ½á¹¹Ìå
 ********************************************************/
 __packed typedef struct {
-    uint8_t                 num;//é‡å‘æ¬¡æ•°
-    uint8_t                 flag;//1,è¡¨ç¤ºæœ‰éœ€è¦ç­‰å¾…çš„ACK;0,è¡¨ç¤ºæ— éœ€è¦ç­‰å¾…çš„ACK
-    uint8_t                 buf[MAX_PACKAGE_LEN];//é‡å‘æ•°æ®ç¼“å†²åŒº
+    uint8_t                 num;//ÖØ·¢´ÎÊı
+    uint8_t                 flag;//1,±íÊ¾ÓĞĞèÒªµÈ´ıµÄACK;0,±íÊ¾ÎŞĞèÒªµÈ´ıµÄACK
+    uint8_t                 buf[MAX_PACKAGE_LEN];//ÖØ·¢Êı¾İ»º³åÇø
     uint16_t                dataLen;
-    uint32_t                sendTime;//é‡å‘çš„ç³»ç»Ÿæ—¶é—´
+    uint32_t                sendTime;//ÖØ·¢µÄÏµÍ³Ê±¼ä
 } protocolWaitAck_t;
 
 
 /******************************************************
-* åè®®æ ‡å‡†å¤´
+* Ğ­Òé±ê×¼Í·
 ********************************************************/
 __packed typedef struct
 {
@@ -218,7 +218,7 @@ __packed typedef struct
 } protocolHead_t;
 
 /******************************************************
-* 4.1  WiFiæ¨¡ç»„è¯·æ±‚è®¾å¤‡ä¿¡æ¯
+* 4.1  WiFiÄ£×éÇëÇóÉè±¸ĞÅÏ¢
 ********************************************************/
 __packed typedef struct
 {
@@ -234,7 +234,7 @@ __packed typedef struct
 } protocolDeviceInfo_t;
 
 /*****************************************************
-* åè®®é€šç”¨æ•°æ®å¸§(4.2ã€4.4ã€4.6ã€4.9ã€4.10)
+* Ğ­ÒéÍ¨ÓÃÊı¾İÖ¡(4.2¡¢4.4¡¢4.6¡¢4.9¡¢4.10)
 ******************************************************/
 __packed typedef struct
 {
@@ -244,7 +244,7 @@ __packed typedef struct
 
 
 /******************************************************
-* 4.3 è®¾å¤‡MCUé€šçŸ¥WiFiæ¨¡ç»„è¿›å…¥é…ç½®æ¨¡å¼
+* 4.3 Éè±¸MCUÍ¨ÖªWiFiÄ£×é½øÈëÅäÖÃÄ£Ê½
 ********************************************************/
 __packed typedef struct
 {
@@ -254,10 +254,10 @@ __packed typedef struct
 } protocolCfgMode_t;
 
 /*****************************************************
-* 4.5 WiFiæ¨¡ç»„å‘MCUé€šçŸ¥WiFiæ¨¡ç»„å·¥ä½œçŠ¶æ€çš„å˜åŒ–
+* 4.5 WiFiÄ£×éÏòMCUÍ¨ÖªWiFiÄ£×é¹¤×÷×´Ì¬µÄ±ä»¯
 ******************************************************/
 /*****************************************************
-* WiFiæ¨¡ç»„å·¥ä½œçŠ¶æ€
+* WiFiÄ£×é¹¤×÷×´Ì¬
 ******************************************************/
 __packed typedef union
 {
@@ -287,18 +287,18 @@ __packed typedef struct
 } protocolWifiStatus_t;
 
 /*****************************************************
-* éæ³•æŠ¥æ–‡ç±»å‹
+* ·Ç·¨±¨ÎÄÀàĞÍ
 ******************************************************/
 __packed typedef enum
 {
-    ERROR_ACK_SUM = 0x01,      //æ ¡éªŒé”™è¯¯
-    ERROR_CMD     = 0x02,      //å‘½ä»¤ç é”™è¯¯
-    ERROR_OTHER   = 0x03,      //å…¶ä»–
+    ERROR_ACK_SUM = 0x01,      //Ğ£Ñé´íÎó
+    ERROR_CMD     = 0x02,      //ÃüÁîÂë´íÎó
+    ERROR_OTHER   = 0x03,      //ÆäËû
 } errorPacketsType_t;
 
 
 /*****************************************************
-* 4.7 éæ³•æ¶ˆæ¯é€šçŸ¥
+* 4.7 ·Ç·¨ÏûÏ¢Í¨Öª
 ******************************************************/
 __packed    typedef struct
 {
@@ -309,7 +309,7 @@ __packed    typedef struct
 
 
 /*****************************************************
-* P0 command å‘½ä»¤ç 
+* P0 command ÃüÁîÂë
 ******************************************************/
 __packed typedef enum
 {
@@ -330,7 +330,7 @@ __packed typedef struct
 } protocolReport_t;
 
 /******************************************************
-* P0æŠ¥æ–‡æ ‡å‡†å¤´
+* P0±¨ÎÄ±ê×¼Í·
 ********************************************************/
 __packed typedef struct
 {
@@ -350,12 +350,12 @@ __packed typedef struct
     uint32_t lastReportTime;
     protocolWaitAck_t waitAck;
     
-    eventInfo_t issuedProcessEvent;                 //æ§åˆ¶äº‹ä»¶
-    eventInfo_t wifiStatusEvent;                    //WIFIçŠ¶æ€ äº‹ä»¶
+    eventInfo_t issuedProcessEvent;                 //¿ØÖÆÊÂ¼ş
+    eventInfo_t wifiStatusEvent;                    //WIFI×´Ì¬ ÊÂ¼ş
 
     volatile gizwitsReport_t lastReportData;
-    gizwitsIssued_t issuedData;                     //äº‘ç«¯ä¸‹å‘æ§åˆ¶æŠ¥æ–‡æ•°æ®
-    moduleStatusInfo_t wifiStatusData;              //WIFI çŠ¶æ€ä¿¡æ¯(ä¿¡å·å¼ºåº¦)
+    gizwitsIssued_t issuedData;                     //ÔÆ¶ËÏÂ·¢¿ØÖÆ±¨ÎÄÊı¾İ
+    moduleStatusInfo_t wifiStatusData;              //WIFI ×´Ì¬ĞÅÏ¢(ĞÅºÅÇ¿¶È)
 }gizwitsProtocol_t;
 
 void gizwitsInit(void);
