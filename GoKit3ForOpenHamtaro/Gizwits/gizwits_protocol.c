@@ -433,13 +433,15 @@ int8_t checkReport(gizwitsReport_t *cur, gizwitsReport_t *last)
         GIZWITS_LOG("Motor_Speed Check Changed\n");
         ret = 1;
     }
-    
+
+#if EN_HAM == 0   
     if(last->devStatus.Infrared != cur->devStatus.Infrared)
     {
         GIZWITS_LOG("Infrared Check Changed\n");
         ret = 1;
     }
-    
+#endif
+
     if(last->devStatus.Alert_1 != cur->devStatus.Alert_1)
     {
         GIZWITS_LOG("Alert_1 Check Changed\n");
@@ -460,6 +462,7 @@ int8_t checkReport(gizwitsReport_t *cur, gizwitsReport_t *last)
         GIZWITS_LOG("Fault_Motor Check Changed\n");
         ret = 1;
     }
+#if EN_HAM == 0   
     if(last->devStatus.Fault_TemHum != cur->devStatus.Fault_TemHum)
     {
         GIZWITS_LOG("Fault_TemHum Check Changed\n");
@@ -490,7 +493,7 @@ int8_t checkReport(gizwitsReport_t *cur, gizwitsReport_t *last)
             ret = 1;
         }
     }
-      
+#endif      
     return ret;
 }
 

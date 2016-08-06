@@ -16,6 +16,10 @@
     #error "no define HARDWARE_VERSION"
 #endif
 
+
+#define EN_HAM  1
+
+
 #define TIMER TIM3
 #define TIMER_IRQ TIM3_IRQn
 #define TIMER_RCC RCC_APB1Periph_TIM3

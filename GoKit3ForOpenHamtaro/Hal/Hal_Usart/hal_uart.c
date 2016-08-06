@@ -6,9 +6,9 @@
 * @version   V03010100
 * @date      2016-07-05
 *
-* @brief     æœºæ™ºäº‘.åªä¸ºæ™ºèƒ½ç¡¬ä»¶è€Œç”Ÿ
+* @brief     »úÖÇÔÆ.Ö»ÎªÖÇÄÜÓ²¼ş¶øÉú
 *            Gizwits Smart Cloud  for Smart Products
-*            é“¾æ¥|å¢å€¼Öµ|å¼€æ”¾|ä¸­ç«‹|å®‰å…¨|è‡ªæœ‰|è‡ªç”±|ç”Ÿæ€
+*            Á´½Ó|ÔöÖµ?|¿ª·Å|ÖĞÁ¢|°²È«|×ÔÓĞ|×ÔÓÉ|ÉúÌ¬
 *            www.gizwits.com
 *
 *********************************************************/
@@ -101,7 +101,7 @@ void uartConfig(void)
 
     USART_ITConfig(USART1,USART_IT_RXNE,ENABLE);
     USART_Cmd(USART1, ENABLE);
-    USART_ClearFlag(USART1, USART_FLAG_TC); /*æ¸…ç©ºå‘é€å®Œæˆæ ‡å¿—,Transmission Complete flag */
+    USART_ClearFlag(USART1, USART_FLAG_TC); /*Çå¿Õ·¢ËÍÍê³É±êÖ¾,Transmission Complete flag */
 #endif
 
 #if defined (Open_UART2)
@@ -115,7 +115,7 @@ void uartConfig(void)
 
     USART_ITConfig(USART2,USART_IT_RXNE,ENABLE);
     USART_Cmd(USART2, ENABLE);
-    USART_ClearFlag(USART2, USART_FLAG_TC); /*æ¸…ç©ºå‘é€å®Œæˆæ ‡å¿—,Transmission Complete flag */
+    USART_ClearFlag(USART2, USART_FLAG_TC); /*Çå¿Õ·¢ËÍÍê³É±êÖ¾,Transmission Complete flag */
 #endif
 
 #if defined (Open_UART3)
@@ -130,7 +130,7 @@ void uartConfig(void)
     USART_ITConfig(USART3,USART_IT_RXNE,ENABLE);
     USART_Cmd(USART3, ENABLE);
 
-    USART_ClearFlag(USART3, USART_FLAG_TC); /*æ¸…ç©ºå‘é€å®Œæˆæ ‡å¿—,Transmission Complete flag */
+    USART_ClearFlag(USART3, USART_FLAG_TC); /*Çå¿Õ·¢ËÍÍê³É±êÖ¾,Transmission Complete flag */
 #endif
 
 }
@@ -145,7 +145,7 @@ void nvicConfiguration(void)
 {
     NVIC_InitTypeDef NVIC_InitStructure;
 #if defined (Open_UART1)
-    /*ä½¿èƒ½ä¸²å£ä¸­æ–­,å¹¶è®¾ç½®ä¼˜å…ˆçº§*/
+    /*Ê¹ÄÜ´®¿ÚÖĞ¶Ï,²¢ÉèÖÃÓÅÏÈ¼¶*/
     NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
@@ -154,7 +154,7 @@ void nvicConfiguration(void)
 #endif
 
 #if defined (Open_UART2)
-    /*ä½¿èƒ½ä¸²å£ä¸­æ–­,å¹¶è®¾ç½®ä¼˜å…ˆçº§*/
+    /*Ê¹ÄÜ´®¿ÚÖĞ¶Ï,²¢ÉèÖÃÓÅÏÈ¼¶*/
     NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
@@ -163,7 +163,7 @@ void nvicConfiguration(void)
 #endif
 
 #if defined (Open_UART3)
-    /*ä½¿èƒ½ä¸²å£ä¸­æ–­,å¹¶è®¾ç½®ä¼˜å…ˆçº§*/
+    /*Ê¹ÄÜ´®¿ÚÖĞ¶Ï,²¢ÉèÖÃÓÅÏÈ¼¶*/
     NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;

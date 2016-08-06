@@ -5,6 +5,10 @@ Hello!
 
 ## 1. 更新日志  
 
+2016-08-06 作者：twowinter  
+更新信息：  
+1.修改数据点，满足仓鼠管家数据点定义；//见EN_HAM   
+
 2016-07-19 作者：twowinter  
 更新信息：  
 1.将GoKit3ForOpenHamtaro\Gizwits目录下文件UTF-8编码转为ANSI编码，解决SI等编辑器中文乱码问题；   

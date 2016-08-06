@@ -124,18 +124,24 @@ __packed typedef struct {
     uint8_t  LED_G;  
     uint8_t  LED_B;
     uint16_t Motor_Speed;
+#if EN_HAM == 0
     uint8_t  Infrared:1;
     uint8_t  reserve_1:7;
     uint8_t  Temperature;
     uint8_t  Humidity;
+#endif
     uint8_t  Alert_1:1;
     uint8_t  Alert_2:1;
     uint8_t  reserve_2:6;
     uint8_t  Fault_LED:1;
     uint8_t  Fault_Motor:1;
+#if EN_HAM == 0
     uint8_t  Fault_TemHum:1;
     uint8_t  Fault_IR:1;
     uint8_t  reserve_3:4;
+#else
+    uint8_t  reserve_3:6;
+#endif
 }devStatus_t;
 
 //custom
@@ -358,6 +364,7 @@ __packed typedef struct
     moduleStatusInfo_t wifiStatusData;              //WIFI 状态信息(信号强度)
 }gizwitsProtocol_t;
 
+uint16_t protocolExchangeBytes(uint16_t value);
 void gizwitsInit(void);
 void gizwitsHandle(gizwitsReport_t *reportData);
 void gizwitsTimerMs(void);
