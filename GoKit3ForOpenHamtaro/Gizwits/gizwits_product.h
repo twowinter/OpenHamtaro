@@ -17,8 +17,6 @@
 #endif
 
 
-#define EN_HAM  1
-
 
 #define TIMER TIM3
 #define TIMER_IRQ TIM3_IRQn

@@ -28,6 +28,9 @@
 #define DISPLAY2COMMUNICATION(ration, addition, value) ((value)-(addition))/(ration)
 #define COMMUNICATION2DISPLAY(ration, addition, value) ((value)*(ration))+(addition)
 
+#define EN_HAM  1
+
+
 //custom
 #define PRODUCT_KEY "your_product_key"
 

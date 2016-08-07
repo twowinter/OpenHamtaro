@@ -44,6 +44,7 @@ void userInit(void)
     motorStatus(MOTOR_SPEED_DEFAULT);
 }
 
+#if EN_HAM == 0 
 void userHandle(void)
 {
     uint8_t ret  = 0;
@@ -92,6 +93,7 @@ void userHandle(void)
         thLastTimer = gizwitsGetTimerCount();
     }
 }
+#endif
 
 void key1ShortPress(void)
 {
@@ -139,8 +141,9 @@ int main(void)
     while(1)
     {
         watchdogFeed();
-        
+        #if EN_HAM == 0 
         userHandle();
+        #endif
         
         gizwitsHandle((gizwitsReport_t *)&reportData);
     }
