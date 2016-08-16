@@ -350,7 +350,7 @@
               <MiscControls>--c99</MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD,MOTOR_16</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Lib\STM32F10x_StdPeriph_Driver\inc;..\Lib\CMSIS\CM3\CoreSupport;..\Lib\CMSIS\CM3\DeviceSupport\ST\STM32F10x;..\User;..\Hal;..\Gizwits</IncludePath>
+              <IncludePath>..\Lib\STM32F10x_StdPeriph_Driver\inc;..\Lib\CMSIS\CM3\CoreSupport;..\Lib\CMSIS\CM3\DeviceSupport\ST\STM32F10x;..\User;..\Hal;..\Gizwits;..\Dal</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -610,6 +610,16 @@
               <FileName>gizwits_protocol.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Gizwits\gizwits_protocol.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Dal</GroupName>
+          <Files>
+            <File>
+              <FileName>dal_rb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Dal\dal_rb.c</FilePath>
             </File>
           </Files>
         </Group>
