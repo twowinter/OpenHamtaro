@@ -7,6 +7,10 @@ Hello!
 
 2016-08-16 作者：twowinter  
 更新信息：  
+1.增加zigbee驱动框架；//见zigbee_ha.c   
+
+2016-08-16 作者：twowinter  
+更新信息：  
 1.增加环形缓冲驱动；//见dal_rb.c   
 
 2016-08-07 作者：twowinter  

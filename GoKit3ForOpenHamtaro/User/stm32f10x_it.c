@@ -158,18 +158,6 @@ void SysTick_Handler(void)
 /**
   * @}
   */
-void USART1_IRQHandler(void)
-{
-  if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
-  { 		
-		USART_ClearITPendingBit(USART1,USART_IT_RXNE);
-		
-		USART_SendData(USART1,USART_ReceiveData(USART1));
-		//Loop until the end of transmission
-		while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
-	
-	}
-}
 
 void USART3_IRQHandler(void)
 {

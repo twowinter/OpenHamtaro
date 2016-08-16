@@ -6,9 +6,9 @@
 * @version   V03010100
 * @date      2016-07-05
 *
-* @brief     æœºæ™ºäº‘.åªä¸ºæ™ºèƒ½ç¡¬ä»¶è€Œç”Ÿ
+* @brief     »úÖÇÔÆ.Ö»ÎªÖÇÄÜÓ²¼ş¶øÉú
 *            Gizwits Smart Cloud  for Smart Products
-*            é“¾æ¥|å¢å€¼Öµ|å¼€æ”¾|ä¸­ç«‹|å®‰å…¨|è‡ªæœ‰|è‡ªç”±|ç”Ÿæ€
+*            Á´½Ó|ÔöÖµ?|¿ª·Å|ÖĞÁ¢|°²È«|×ÔÓĞ|×ÔÓÉ|ÉúÌ¬
 *            www.gizwits.com
 *
 *********************************************************/
@@ -22,6 +22,7 @@
 #include "Hal_temp_hum/Hal_temp_hum.h"
 #include "Hal_infrared/Hal_infrared.h"
 #include "Hal_Watchdog/hal_watchdog.h"
+#include "zigbee_ha.h"
 
 volatile gizwitsReport_t reportData;
 keyTypedef_t singleKey[2];
@@ -37,7 +38,7 @@ void userInit(void)
     motorInit();
     dht11Init();
     irInit();
-    watchdogInit(2);    //5,625çœ‹é—¨ç‹—å¤ä½æ—¶é—´2s
+    watchdogInit(2);    //5,625¿´ÃÅ¹·¸´Î»Ê±¼ä2s
     
     memset((uint8_t*)&reportData, 0, sizeof(gizwitsReport_t));
     reportData.devStatus.Motor_Speed = protocolExchangeBytes(Y2X(MOTOR_SPEED_RATIO,MOTOR_SPEED_ADDITION,MOTOR_SPEED_DEFAULT));
@@ -136,6 +137,7 @@ int main(void)
     keyParaInit(&keys); 
 
     gizwitsInit();
+    ZB_HA_Init();
     
     printf("Gokit Init Success \r\n");
     while(1)
