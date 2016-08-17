@@ -551,6 +551,11 @@
               <FileType>1</FileType>
               <FilePath>..\User\delay.c</FilePath>
             </File>
+            <File>
+              <FileName>zigbee_ha.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\zigbee_ha.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
