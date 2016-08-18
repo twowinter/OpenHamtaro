@@ -64,6 +64,7 @@ static int8_t GetDataFromBuf(void)
             case SOP_STATE:
                 if (ch == ZB_UART_SOF) {
                     s_zbFrame.state = LEN_STATE;
+                    s_zbFrame.curLen = 0;
                 }
                 break;
 
@@ -103,7 +104,7 @@ static int8_t GetDataFromBuf(void)
                 s_zbFrame.state = SOP_STATE;
                 if (s_zbFrame.chksum != ch) {
                     #if EN_DEBUG > 0
-                    printf("uart chk sum\r\n");
+                    printf("uart chk sum err\r\n");
                     #endif
                 } else {
                     #if EN_DEBUG > 0
