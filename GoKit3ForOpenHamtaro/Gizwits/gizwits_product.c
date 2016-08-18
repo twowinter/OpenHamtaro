@@ -33,12 +33,14 @@ int8_t eventProcess(eventInfo_t *info, uint8_t *data, uint32_t len)
                 if(LED_OnOn == issuedData->attrVals.LED_OnOff)
                 {
                     reportData.devStatus.LED_OnOff = LED_OnOn;
-                    ledRgbControl(254,0,0);              
+                    ledRgbControl(254,0,0);       
+                    ZB_HA_LightControl(LED_OnOn);
                 }
                 else
                 {
                     reportData.devStatus.LED_OnOff = LED_OnOff;
-                    ledRgbControl(0,0,0);               
+                    ledRgbControl(0,0,0);
+                    ZB_HA_LightControl(LED_OnOff);
                 }
                 
                 GIZWITS_LOG("Evt: SetLED_OnOff %d\r\n",reportData.devStatus.LED_OnOff);

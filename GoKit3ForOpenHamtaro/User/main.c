@@ -14,6 +14,7 @@
 *********************************************************/
 #include <string.h>
 #include "gizwits_product.h"
+#include "header.h"
 #include "Hal_key/Hal_key.h"
 #include "Hal_Usart/hal_uart.h"
 #include "Hal_led/Hal_led.h"
@@ -148,5 +149,6 @@ int main(void)
         #endif
         
         gizwitsHandle((gizwitsReport_t *)&reportData);
+        ZB_HA_Handle();
     }
 }
