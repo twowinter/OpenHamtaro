@@ -9,6 +9,7 @@
 #include "Hal_rgb_led/Hal_rgb_led.h"
 #include "Hal_temp_hum/Hal_temp_hum.h"
 #include "Hal_infrared/Hal_infrared.h"
+#include "zigbee_ha.h"
 
 extern volatile gizwitsReport_t reportData;
 
@@ -19,6 +20,7 @@ int8_t eventProcess(eventInfo_t *info, uint8_t *data, uint32_t len)
     int16_t motorValue = 0;
     gizwitsIssued_t *issuedData = (gizwitsIssued_t *)data;
     moduleStatusInfo_t *wifiData = (moduleStatusInfo_t *)data;
+    ZB_LIGHT_CMD_T zbLightCmd;
 
     if((NULL == info) || (NULL == issuedData))
     {
@@ -34,40 +36,55 @@ int8_t eventProcess(eventInfo_t *info, uint8_t *data, uint32_t len)
                 {
                     reportData.devStatus.LED_OnOff = LED_OnOn;
                     ledRgbControl(254,0,0);       
-                    ZB_HA_LightControl(LED_OnOn);
                 }
                 else
                 {
                     reportData.devStatus.LED_OnOff = LED_OnOff;
                     ledRgbControl(0,0,0);
-                    ZB_HA_LightControl(LED_OnOff);
                 }
                 
-                GIZWITS_LOG("Evt: SetLED_OnOff %d\r\n",reportData.devStatus.LED_OnOff);
+                zbLightCmd.clusterId = ZCL_Cluster_ID_OnOff;
+                zbLightCmd.attr.cmd_onoff.onoff = reportData.devStatus.LED_OnOff;
+                ZB_HA_LightControl(&zbLightCmd);
                 
+                GIZWITS_LOG("Evt: SetLED_OnOff %d\r\n",reportData.devStatus.LED_OnOff);
                 break;
             case SetLED_Color:
+                zbLightCmd.clusterId = ZCL_Cluster_ID_ColorControl;
                 switch(issuedData->attrVals.LED_Color)
                 {
                     case LED_Costom:
                         reportData.devStatus.LED_Color = LED_Costom;
                         ledRgbControl(reportData.devStatus.LED_R, reportData.devStatus.LED_G, reportData.devStatus.LED_B);
+                        zbLightCmd.attr.cmd_colorctrl.red = reportData.devStatus.LED_R;
+                        zbLightCmd.attr.cmd_colorctrl.green = reportData.devStatus.LED_G;
+                        zbLightCmd.attr.cmd_colorctrl.blue = reportData.devStatus.LED_B;
                         break;
                     case LED_Yellow:
                         reportData.devStatus.LED_Color = LED_Yellow;
-                        ledRgbControl(254, 254, 0);                 
+                        ledRgbControl(254, 254, 0);    
+                        zbLightCmd.attr.cmd_colorctrl.red = 254;
+                        zbLightCmd.attr.cmd_colorctrl.green = 254;
+                        zbLightCmd.attr.cmd_colorctrl.blue = 0;
                         break;
                     case LED_Purple:
                         reportData.devStatus.LED_Color = LED_Purple;
-                        ledRgbControl(254, 0, 70);                    
+                        ledRgbControl(254, 0, 70);
+                        zbLightCmd.attr.cmd_colorctrl.red = 254;
+                        zbLightCmd.attr.cmd_colorctrl.green = 0;
+                        zbLightCmd.attr.cmd_colorctrl.blue = 70;
                         break;
                     case LED_Pink:
                         reportData.devStatus.LED_Color = LED_Pink;
-                        ledRgbControl(238 ,30 ,30);                     
+                        ledRgbControl(238 ,30 ,30);   
+                        zbLightCmd.attr.cmd_colorctrl.red = 238;
+                        zbLightCmd.attr.cmd_colorctrl.green = 30;
+                        zbLightCmd.attr.cmd_colorctrl.blue = 30;
                         break;
                     default:
                         break;
                 }
+                ZB_HA_LightControl(&zbLightCmd);
                 GIZWITS_LOG("Evt: SetLED_Color %d\r\n",issuedData->attrVals.LED_Color);
                 break;
             case SetLED_R:
@@ -75,7 +92,10 @@ int8_t eventProcess(eventInfo_t *info, uint8_t *data, uint32_t len)
                 issuedData->attrVals.LED_R = X2Y(LED_B_RATIO,LED_B_ADDITION,issuedData->attrVals.LED_R);
                 ledRgbControl(issuedData->attrVals.LED_R,X2Y(LED_B_RATIO,LED_B_ADDITION,\
             reportData.devStatus.LED_G),X2Y(LED_B_RATIO,  LED_B_ADDITION, reportData.devStatus.LED_G));
-                 
+
+                zbLightCmd.clusterId = ZCL_Cluster_ID_LevelControl;
+                zbLightCmd.attr.cmd_levelctrl.level = reportData.devStatus.LED_R;
+                ZB_HA_LightControl(&zbLightCmd);
                 GIZWITS_LOG("Evt:color %d SetLED_R %d\r\n",issuedData->attrVals.LED_Color,issuedData->attrVals.LED_R);
                 break;
             case SetLED_G:
@@ -83,7 +103,10 @@ int8_t eventProcess(eventInfo_t *info, uint8_t *data, uint32_t len)
                 issuedData->attrVals.LED_G = X2Y(LED_B_RATIO,LED_B_ADDITION,issuedData->attrVals.LED_G);
                 ledRgbControl(X2Y(LED_B_RATIO,LED_B_ADDITION,reportData.devStatus.LED_G),\
             issuedData->attrVals.LED_G,X2Y(LED_B_RATIO, LED_B_ADDITION,reportData.devStatus.LED_B));
-            
+
+                zbLightCmd.clusterId = ZCL_Cluster_ID_LevelControl;
+                zbLightCmd.attr.cmd_levelctrl.level = reportData.devStatus.LED_G;
+                ZB_HA_LightControl(&zbLightCmd);
                 GIZWITS_LOG("Evt: color %d SetLED_G %d\r\n", issuedData->attrVals.LED_Color, issuedData->attrVals.LED_G);
                 break;
             case SetLED_B:
@@ -91,7 +114,10 @@ int8_t eventProcess(eventInfo_t *info, uint8_t *data, uint32_t len)
                 issuedData->attrVals.LED_B = X2Y(LED_B_RATIO,LED_B_ADDITION,issuedData->attrVals.LED_B);
                 ledRgbControl(X2Y(LED_B_RATIO,LED_B_ADDITION,reportData.devStatus.LED_G),\
             X2Y(LED_B_RATIO,LED_B_ADDITION,reportData.devStatus.LED_G),issuedData->attrVals.LED_B );
-            
+
+                zbLightCmd.clusterId = ZCL_Cluster_ID_LevelControl;
+                zbLightCmd.attr.cmd_levelctrl.level = reportData.devStatus.LED_B;
+                ZB_HA_LightControl(&zbLightCmd);
                 GIZWITS_LOG("Evt: color %dSetLED_B %d\r\n",issuedData->attrVals.LED_Color,issuedData->attrVals.LED_B);
                 break;
             case SetMotor:

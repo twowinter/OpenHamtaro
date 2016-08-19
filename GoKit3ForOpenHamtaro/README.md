@@ -5,6 +5,10 @@ Hello!
 
 ## 1. 更新日志  
 
+2016-08-19 作者：twowinter  
+更新信息：  
+1.增加zigbeeHA的发送和接收处理；//见ZB_HA_LightControl()/GetDataFromBuf()   
+
 2016-08-16 作者：twowinter  
 更新信息：  
 1.增加zigbee驱动框架；//见zigbee_ha.c   
