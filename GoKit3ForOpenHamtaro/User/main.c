@@ -66,7 +66,9 @@ void userHandle(void)
             reportData.devStatus.Infrared = curInfrared;
 
             irLastTimer = gizwitsGetTimerCount();
+            #if EN_DEBUG > 0
             printf("Infrared %d \r\n", irLastTimer);
+            #endif
         }
     }
     
@@ -83,13 +85,16 @@ void userHandle(void)
                 
                 lastTem = curTem;
                 lastHum = curHum;
-                
+                #if EN_DEBUG > 0
                 printf("Temperature&Humidity  [%d-%d] %d %d\r\n", gizwitsGetTimerCount(), thLastTimer, curTem, curHum);
+                #endif
             }
         }
         else
         {
+            #if EN_DEBUG > 0
             printf("Failed to read DHT11\r\n");
+            #endif
         }
         
         thLastTimer = gizwitsGetTimerCount();
@@ -99,18 +104,24 @@ void userHandle(void)
 
 void key1ShortPress(void)
 {
+    #if EN_DEBUG > 0
     printf("KEY1 PRESS\r\n");
+    #endif
 }
 
 void key1LongPress(void)
 {
+    #if EN_DEBUG > 0
     printf("KEY1 PRESS LONG ,Wifi Reset\r\n");
+    #endif
     gizwitsSetDefault();
 
 }
 void key2ShortPress(void)
 {
+    #if EN_DEBUG > 0
     printf("KEY2 PRESS ,Soft AP mode\r\n");
+    #endif
 
     //Soft AP mode, RGB red
     ledRgbControl(255, 0, 0);
@@ -119,8 +130,10 @@ void key2ShortPress(void)
 
 void key2LongPress(void)
 {
+    #if EN_DEBUG > 0
     //AirLink mode, RGB Green
     printf("KEY2 PRESS LONG ,AirLink mode\r\n");
+    #endif
     ledRgbControl(0, 128, 0);
     gizwitsSetMode(AirLink_Mode);
 }
@@ -139,8 +152,9 @@ int main(void)
 
     gizwitsInit();
     ZB_HA_Init();
-    
+    #if EN_DEBUG > 0
     printf("Gokit Init Success \r\n");
+    #endif
     while(1)
     {
         watchdogFeed();

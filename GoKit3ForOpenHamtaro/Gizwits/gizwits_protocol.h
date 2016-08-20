@@ -2,13 +2,14 @@
 #define _GIZ_PROTOCOL_H
 
 #include <stdint.h>
+#include "header.h"
 
 #define DEBUG
 #ifdef DEBUG
 #define GIZWITS_LOG printf
 #endif
 
-#define PROTOCOL_DEBUG
+//#define PROTOCOL_DEBUG
 
 #define SoftAp_Mode    0x01
 #define AirLink_Mode   0x02

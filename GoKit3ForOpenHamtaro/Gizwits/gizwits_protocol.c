@@ -26,7 +26,9 @@ static void rbCreate(rb_t* rb)
 {
     if(NULL == rb)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: input rb is NULL\r\n");
+        #endif
         return;
     }
 
@@ -38,7 +40,9 @@ static void rbDelete(rb_t* rb)
 {
     if(NULL == rb)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: input rb is NULL\r\n");
+        #endif
         return;
     }
 
@@ -52,7 +56,9 @@ static size_t rbCapacity(rb_t *rb)
 {
     if(NULL == rb)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: input rb is NULL\r\n");
+        #endif
         return -1;
     }
 
@@ -63,7 +69,9 @@ static size_t rbCanRead(rb_t *rb)
 {
     if(NULL == rb)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: input rb is NULL\r\n");
+        #endif
         return -1;
     }
 
@@ -84,7 +92,9 @@ static size_t rbCanWrite(rb_t *rb)
 {
     if(NULL == rb)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: input rb is NULL\r\n");
+        #endif
         return -1;
     }
 
@@ -97,13 +107,17 @@ static size_t rbRead(rb_t *rb, void *data, size_t count)
 
     if(NULL == rb)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: input rb is NULL\r\n");
+        #endif
         return -1;
     }
 
     if(NULL == data)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: input data is NULL\r\n");
+        #endif
         return -1;
     }
 
@@ -140,19 +154,25 @@ static size_t rbWrite(rb_t *rb, const void *data, size_t count)
 
     if(NULL == rb)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: rb is empty \r\n");
+        #endif
         return -1;
     }
 
     if(NULL == data)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: data is empty \r\n");
+        #endif
         return -1;
     }
 
     if (count >= rbCanWrite(rb))
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: no memory %d \r\n", rbCanWrite(rb));
+        #endif
         return -1;
     }
 
@@ -192,7 +212,9 @@ static uint8_t protocolSum( uint8_t *buf, int len )
 
     if(buf == NULL || len <= 0)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: buf is empty or len error %d \r\n", len);
+        #endif
         return 0;
     }
 
@@ -400,77 +422,103 @@ int8_t checkReport(gizwitsReport_t *cur, gizwitsReport_t *last)
 
     if(last->devStatus.LED_OnOff != cur->devStatus.LED_OnOff)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("LED_OnOff Check Changed\n");
+        #endif
         ret = 1;
     }
     
     if(last->devStatus.LED_Color != cur->devStatus.LED_Color)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("LED_Color Check Changed\n");
+        #endif
         ret = 1;
     }
     
     if(last->devStatus.LED_R != cur->devStatus.LED_R)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("LED_R Check Changed\n");
+        #endif
         ret = 1;
     }
     
     if(last->devStatus.LED_G != cur->devStatus.LED_G)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("LED_G Check Changed\n");
+        #endif
         ret = 1;
     }
     
     if(last->devStatus.LED_B != cur->devStatus.LED_B)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("LED_B Check Changed\n");
+        #endif
         ret = 1;
     }
     
     if(last->devStatus.Motor_Speed != cur->devStatus.Motor_Speed)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("Motor_Speed Check Changed\n");
+        #endif
         ret = 1;
     }
 
 #if EN_HAM == 0   
     if(last->devStatus.Infrared != cur->devStatus.Infrared)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("Infrared Check Changed\n");
+        #endif
         ret = 1;
     }
 #endif
 
     if(last->devStatus.Alert_1 != cur->devStatus.Alert_1)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("Alert_1 Check Changed\n");
+        #endif
         ret = 1;
     }
     if(last->devStatus.Alert_2 != cur->devStatus.Alert_2)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("Alert_2 Check Changed\n");
+        #endif
         ret = 1;
     }
     if(last->devStatus.Fault_LED != cur->devStatus.Fault_LED)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("Fault_LED Check Changed\n");
+        #endif
         ret = 1;
     }
     if(last->devStatus.Fault_Motor != cur->devStatus.Fault_Motor)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("Fault_Motor Check Changed\n");
+        #endif
         ret = 1;
     }
 #if EN_HAM == 0   
     if(last->devStatus.Fault_TemHum != cur->devStatus.Fault_TemHum)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("Fault_TemHum Check Changed\n");
+        #endif
         ret = 1;
     }
     if(last->devStatus.Fault_IR != cur->devStatus.Fault_IR)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("Fault_IR Check Changed\n");
+        #endif
         ret = 1;
     }
     
@@ -478,7 +526,9 @@ int8_t checkReport(gizwitsReport_t *cur, gizwitsReport_t *last)
     {
         if((gizwitsGetTimerCount()-lastReportTime) >= REPORT_TIME_MAX)
         {
+            #if EN_DEBUG > 0
             GIZWITS_LOG("Temperature  Check Changed\n");
+            #endif
             lastReportTime = gizwitsGetTimerCount();
             ret = 1;
         }
@@ -488,7 +538,9 @@ int8_t checkReport(gizwitsReport_t *cur, gizwitsReport_t *last)
     {
         if((gizwitsGetTimerCount()-lastReportTime) >= REPORT_TIME_MAX)
         {
+            #if EN_DEBUG > 0
             GIZWITS_LOG("Humidity  Check Changed\n");
+            #endif
             lastReportTime = gizwitsGetTimerCount();
             ret = 1;
         }
@@ -501,7 +553,9 @@ void protocolHeadInit(protocolHead_t *head)
 {
     if(NULL == head)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: head is empty \r\n");
+        #endif
         return;
     }
 
@@ -514,7 +568,9 @@ void protocolWaitAck(uint8_t *data, uint32_t len)
 {
     if(NULL == data)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: data is empty \r\n");
+        #endif
         return;
     }
 
@@ -534,13 +590,16 @@ void protocolResendData(void)
     {
         return;
     }
-
+    #if EN_DEBUG > 0
     GIZWITS_LOG("Warning: timeout, resend data \r\n");
+    #endif
     
     ret = uartWrite(gizwitsProtocol.waitAck.buf, gizwitsProtocol.waitAck.dataLen);
     if(ret != gizwitsProtocol.waitAck.dataLen)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: resend data error\n");
+        #endif
     }
 
     gizwitsProtocol.waitAck.sendTime = gizwitsGetTimerCount();
@@ -552,7 +611,9 @@ void protocolWaitAckCheck(protocolHead_t *data)
 
     if(NULL == data)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: data is empty \r\n");
+        #endif
         return;
     }
 
@@ -575,8 +636,9 @@ int8_t protocolCommonAck(protocolHead_t *buf)
     ret = uartWrite((uint8_t *)&ack, sizeof(protocolCommon_t));
     if(ret < 0)
     {
-        //打印日志
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: uart write error %d \r\n", ret);
+        #endif
     }
 
     return ret;
@@ -591,7 +653,9 @@ void protocolAckHandle(void)
             //200ms未收到ACK重发
             if(SEND_MAX_TIME < (gizwitsGetTimerCount() - gizwitsProtocol.waitAck.sendTime))
             {
+                #if EN_DEBUG > 0
                 GIZWITS_LOG("Warning:protocolResendData %d %d %d\r\n", gizwitsGetTimerCount(), gizwitsProtocol.waitAck.sendTime, gizwitsProtocol.waitAck.num);
+                #endif
                 protocolResendData();
                 gizwitsProtocol.waitAck.num++;
             }
@@ -624,8 +688,9 @@ int8_t protocolGetDeviceInfo(protocolHead_t * head)
     ret = uartWrite((uint8_t *)&deviceInfo, sizeof(protocolDeviceInfo_t));
     if(ret < 0)
     {
-        //打印日志
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: uart write error %d \r\n", ret);
+        #endif
     }
     
     return ret;
@@ -683,14 +748,18 @@ uint8_t protocolModuleStatus(protocolWifiStatus_t *status)
             {
                 gizwitsProtocol.wifiStatusEvent.event[gizwitsProtocol.wifiStatusEvent.num] = WIFI_SOFTAP;
                 gizwitsProtocol.wifiStatusEvent.num++;
+                #if EN_DEBUG > 0
                 GIZWITS_LOG("OnBoarding: SoftAP or Web mode\r\n");
+                #endif
             }
 
             if(1 == status->ststus.types.station)
             {
                 gizwitsProtocol.wifiStatusEvent.event[gizwitsProtocol.wifiStatusEvent.num] = WIFI_AIRLINK;
                 gizwitsProtocol.wifiStatusEvent.num++;
+                #if EN_DEBUG > 0
                 GIZWITS_LOG("OnBoarding: AirLink mode\r\n");
+                #endif
             }
         }
         else
@@ -699,14 +768,18 @@ uint8_t protocolModuleStatus(protocolWifiStatus_t *status)
             {
                 gizwitsProtocol.wifiStatusEvent.event[gizwitsProtocol.wifiStatusEvent.num] = WIFI_SOFTAP;
                 gizwitsProtocol.wifiStatusEvent.num++;
+                #if EN_DEBUG > 0
                 GIZWITS_LOG("OnBoarding: SoftAP or Web mode\r\n");
+                #endif
             }
 
             if(1 == status->ststus.types.station)
             {
                 gizwitsProtocol.wifiStatusEvent.event[gizwitsProtocol.wifiStatusEvent.num] = WIFI_STATION;
                 gizwitsProtocol.wifiStatusEvent.num++;
+                #if EN_DEBUG > 0
                 GIZWITS_LOG("OnBoarding: Station mode\r\n");
+                #endif
             }
         }
     }
@@ -719,13 +792,17 @@ uint8_t protocolModuleStatus(protocolWifiStatus_t *status)
         {
             gizwitsProtocol.wifiStatusEvent.event[gizwitsProtocol.wifiStatusEvent.num] = WIFI_OPEN_BINDING;
             gizwitsProtocol.wifiStatusEvent.num++;
+            #if EN_DEBUG > 0
             GIZWITS_LOG("WiFi status: in binding mode\r\n");
+            #endif
         }
         else
         {
             gizwitsProtocol.wifiStatusEvent.event[gizwitsProtocol.wifiStatusEvent.num] = WIFI_CLOSE_BINDING;
             gizwitsProtocol.wifiStatusEvent.num++;
+            #if EN_DEBUG > 0
             GIZWITS_LOG("WiFi status: out binding mode\r\n");
+            #endif
         }
     }
 
@@ -737,13 +814,17 @@ uint8_t protocolModuleStatus(protocolWifiStatus_t *status)
         {
             gizwitsProtocol.wifiStatusEvent.event[gizwitsProtocol.wifiStatusEvent.num] = WIFI_CON_ROUTER;
             gizwitsProtocol.wifiStatusEvent.num++;
+            #if EN_DEBUG > 0
             GIZWITS_LOG("WiFi status: connected router\r\n");
+            #endif
         }
         else
         {
             gizwitsProtocol.wifiStatusEvent.event[gizwitsProtocol.wifiStatusEvent.num] = WIFI_DISCON_ROUTER;
             gizwitsProtocol.wifiStatusEvent.num++;
+            #if EN_DEBUG > 0
             GIZWITS_LOG("WiFi status: disconnected router\r\n");
+            #endif
         }
     }
 
@@ -755,13 +836,17 @@ uint8_t protocolModuleStatus(protocolWifiStatus_t *status)
         {
             gizwitsProtocol.wifiStatusEvent.event[gizwitsProtocol.wifiStatusEvent.num] = WIFI_CON_M2M;
             gizwitsProtocol.wifiStatusEvent.num++;
+            #if EN_DEBUG > 0
             GIZWITS_LOG("WiFi status: connected m2m\r\n");
+            #endif
         }
         else
         {
             gizwitsProtocol.wifiStatusEvent.event[gizwitsProtocol.wifiStatusEvent.num] = WIFI_DISCON_M2M;
             gizwitsProtocol.wifiStatusEvent.num++;
+            #if EN_DEBUG > 0
             GIZWITS_LOG("WiFi status: disconnected m2m\r\n");
+            #endif
         }
     }
 
@@ -773,13 +858,17 @@ uint8_t protocolModuleStatus(protocolWifiStatus_t *status)
         {
             gizwitsProtocol.wifiStatusEvent.event[gizwitsProtocol.wifiStatusEvent.num] = WIFI_CON_APP;
             gizwitsProtocol.wifiStatusEvent.num++;
+            #if EN_DEBUG > 0
             GIZWITS_LOG("WiFi status: app connect\r\n");
+            #endif
         }
         else
         {
             gizwitsProtocol.wifiStatusEvent.event[gizwitsProtocol.wifiStatusEvent.num] = WIFI_DISCON_APP;
             gizwitsProtocol.wifiStatusEvent.num++;
+            #if EN_DEBUG > 0
             GIZWITS_LOG("WiFi status: no app connect\r\n");
+            #endif
         }
     }
 
@@ -791,20 +880,26 @@ uint8_t protocolModuleStatus(protocolWifiStatus_t *status)
         {
             gizwitsProtocol.wifiStatusEvent.event[gizwitsProtocol.wifiStatusEvent.num] = WIFI_OPEN_TESTMODE;
             gizwitsProtocol.wifiStatusEvent.num++;
+            #if EN_DEBUG > 0
             GIZWITS_LOG("WiFi status: in test mode\r\n");
+            #endif
         }
         else
         {
             gizwitsProtocol.wifiStatusEvent.event[gizwitsProtocol.wifiStatusEvent.num] = WIFI_CLOSE_TESTMODE;
             gizwitsProtocol.wifiStatusEvent.num++;
+            #if EN_DEBUG > 0
             GIZWITS_LOG("WiFi status: out test mode\r\n");
+            #endif
         }
     }
 
     gizwitsProtocol.wifiStatusEvent.event[gizwitsProtocol.wifiStatusEvent.num] = WIFI_RSSI;
     gizwitsProtocol.wifiStatusEvent.num++;
     gizwitsProtocol.wifiStatusData.rssi = status->ststus.types.rssi;
+    #if EN_DEBUG > 0
     GIZWITS_LOG("RSSI is %d \r\n", gizwitsProtocol.wifiStatusData.rssi);
+    #endif
 
     gizwitsProtocol.issuedFlag = 2;
 
@@ -839,14 +934,18 @@ int8_t gizwitsPutData(uint8_t *buf, uint32_t len)
 
     if(NULL == buf)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: buf is empty \r\n");
+        #endif
         return -1;
     }
 
     count = rbWrite(&pRb, buf, len);
     if(count != len)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: Failed to rbWrite \r\n");
+        #endif
         return -1;
     }
 
@@ -866,8 +965,9 @@ uint8_t gizwitsSetDefault(void)
     ret = uartWrite((uint8_t *)&setDefault, sizeof(protocolCommon_t));
     if(ret < 0)
     {
-        //打印日志
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: uart write error %d \r\n", ret);
+        #endif
     }
 
     protocolWaitAck((uint8_t *)&setDefault, sizeof(protocolCommon_t));
@@ -889,8 +989,9 @@ uint8_t gizwitsSetMode(uint8_t mode)
     ret = uartWrite((uint8_t *)&cfgMode, sizeof(protocolCfgMode_t));
     if(ret < 0)
     {
-        //打印日志
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: uart write error %d \r\n", ret);
+        #endif
     }
 
     protocolWaitAck((uint8_t *)&cfgMode, sizeof(protocolCfgMode_t));
@@ -936,8 +1037,9 @@ uint8_t protocolIssuedDataAck(protocolHead_t *head, uint8_t *data, uint32_t len)
     ret = uartWrite(ptrData, dataLen);
     if(ret < 0)
     {
-        //打印日志
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: protocolIssuedDataAck uart write error %d dataLen %d \r\n", ret, dataLen);
+        #endif
     }
 
     return ret;
@@ -959,8 +1061,9 @@ uint8_t gizwitsReportData(uint8_t action, uint8_t *data, uint32_t len)
     ret = uartWrite((uint8_t *)&protocolReport, sizeof(protocolReport_t));
     if(ret < 0)
     {
-        //打印日志
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: uart write error %d \r\n", ret);
+        #endif
     }
 
     protocolWaitAck((uint8_t *)&protocolReport, sizeof(protocolReport_t));
@@ -985,8 +1088,9 @@ uint8_t protocolErrorCmd(protocolHead_t *head,errorPacketsType_t errno)
     ret = uartWrite((uint8_t *)&errorType, sizeof(protocolErrorType_t));
     if(ret < 0)
     {
-        //打印日志
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: uart write error %d \r\n", ret);
+        #endif
     }
 
     return ret;
@@ -1026,17 +1130,21 @@ void gizwitsHandle(gizwitsReport_t *reportData)
 
     if(0 == ret)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("Get One Packet!\r\n");
-        
+        #endif
+#if EN_DEBUG > 0  
 #ifdef PROTOCOL_DEBUG
+        
         GIZWITS_LOG("WiFi2MCU[%4d:%4d]: ", gizwitsGetTimerCount(), protocolLen);
+        
         for(i=0; i<protocolLen;i++)
         {
             GIZWITS_LOG("%02x ", gizwitsProtocol.protocolBuf[i]);
         }
         GIZWITS_LOG("\r\n");
 #endif
-
+#endif
         recvHead = (protocolHead_t *)gizwitsProtocol.protocolBuf;
         switch (recvHead->cmd)
         {
@@ -1072,7 +1180,9 @@ void gizwitsHandle(gizwitsReport_t *reportData)
                 break;
             default:
                 protocolErrorCmd(recvHead,ERROR_CMD);
+                #if EN_DEBUG > 0
                 GIZWITS_LOG("ERROR: cmd code error!\r\n");
+                #endif
                 break;
         }
     }
@@ -1080,7 +1190,9 @@ void gizwitsHandle(gizwitsReport_t *reportData)
     {
         //校验失败，报告异常
         protocolErrorCmd(recvHead,ERROR_ACK_SUM);
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: check sum error!\r\n");
+        #endif
         return;
     }
     
@@ -1106,13 +1218,17 @@ void gizwitsHandle(gizwitsReport_t *reportData)
     if((1 == checkReport(reportData, (gizwitsReport_t *)&gizwitsProtocol.lastReportData)))
     {
         memcpy((uint8_t *)&gizwitsProtocol.lastReportData, (uint8_t *)reportData, sizeof(gizwitsReport_t));
+        #if EN_DEBUG > 0
         GIZWITS_LOG("changed, report data\r\n");
+        #endif
         gizwitsReportData(ACTION_REPORT_DEV_STATUS, (uint8_t *)&gizwitsProtocol.lastReportData, sizeof(gizwitsReport_t));
     }
     
     if(1000*60*10 <= (gizwitsGetTimerCount() - gizwitsProtocol.lastReportTime))
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("Info: 600S report data\r\n");
+        #endif
         gizwitsReportData(ACTION_REPORT_DEV_STATUS, (uint8_t *)&gizwitsProtocol.lastReportData, sizeof(gizwitsReport_t));
     }
 }

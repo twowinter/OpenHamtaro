@@ -10,6 +10,7 @@
 #include "Hal_temp_hum/Hal_temp_hum.h"
 #include "Hal_infrared/Hal_infrared.h"
 #include "zigbee_ha.h"
+#include "header.h"
 
 extern volatile gizwitsReport_t reportData;
 
@@ -46,8 +47,9 @@ int8_t eventProcess(eventInfo_t *info, uint8_t *data, uint32_t len)
                 zbLightCmd.clusterId = ZCL_Cluster_ID_OnOff;
                 zbLightCmd.attr.cmd_onoff.onoff = reportData.devStatus.LED_OnOff;
                 ZB_HA_LightControl(&zbLightCmd);
-                
+                #if EN_DEBUG > 0
                 GIZWITS_LOG("Evt: SetLED_OnOff %d\r\n",reportData.devStatus.LED_OnOff);
+                #endif
                 break;
             case SetLED_Color:
                 zbLightCmd.clusterId = ZCL_Cluster_ID_ColorControl;
@@ -85,7 +87,9 @@ int8_t eventProcess(eventInfo_t *info, uint8_t *data, uint32_t len)
                         break;
                 }
                 ZB_HA_LightControl(&zbLightCmd);
+                #if EN_DEBUG > 0
                 GIZWITS_LOG("Evt: SetLED_Color %d\r\n",issuedData->attrVals.LED_Color);
+                #endif
                 break;
             case SetLED_R:
                 reportData.devStatus.LED_R = issuedData->attrVals.LED_R;
@@ -96,7 +100,9 @@ int8_t eventProcess(eventInfo_t *info, uint8_t *data, uint32_t len)
                 zbLightCmd.clusterId = ZCL_Cluster_ID_LevelControl;
                 zbLightCmd.attr.cmd_levelctrl.level = reportData.devStatus.LED_R;
                 ZB_HA_LightControl(&zbLightCmd);
+                #if EN_DEBUG > 0
                 GIZWITS_LOG("Evt:color %d SetLED_R %d\r\n",issuedData->attrVals.LED_Color,issuedData->attrVals.LED_R);
+                #endif
                 break;
             case SetLED_G:
                 reportData.devStatus.LED_G = issuedData->attrVals.LED_G;
@@ -107,7 +113,9 @@ int8_t eventProcess(eventInfo_t *info, uint8_t *data, uint32_t len)
                 zbLightCmd.clusterId = ZCL_Cluster_ID_LevelControl;
                 zbLightCmd.attr.cmd_levelctrl.level = reportData.devStatus.LED_G;
                 ZB_HA_LightControl(&zbLightCmd);
+                #if EN_DEBUG > 0
                 GIZWITS_LOG("Evt: color %d SetLED_G %d\r\n", issuedData->attrVals.LED_Color, issuedData->attrVals.LED_G);
+                #endif
                 break;
             case SetLED_B:
                 reportData.devStatus.LED_B = issuedData->attrVals.LED_B;
@@ -118,14 +126,17 @@ int8_t eventProcess(eventInfo_t *info, uint8_t *data, uint32_t len)
                 zbLightCmd.clusterId = ZCL_Cluster_ID_LevelControl;
                 zbLightCmd.attr.cmd_levelctrl.level = reportData.devStatus.LED_B;
                 ZB_HA_LightControl(&zbLightCmd);
+                #if EN_DEBUG > 0
                 GIZWITS_LOG("Evt: color %dSetLED_B %d\r\n",issuedData->attrVals.LED_Color,issuedData->attrVals.LED_B);
+                #endif
                 break;
             case SetMotor:
                 reportData.devStatus.Motor_Speed = issuedData->attrVals.Motor_Speed;  
                 motorValue = X2Y(MOTOR_SPEED_RATIO,MOTOR_SPEED_ADDITION,protocolExchangeBytes(issuedData->attrVals.Motor_Speed));
                 motorStatus(motorValue);
-            
+                #if EN_DEBUG > 0
                 GIZWITS_LOG("Evt: SetMotor %d\r\n", motorValue);
+                #endif
                 break;
             
             case WIFI_SOFTAP:
@@ -144,7 +155,9 @@ int8_t eventProcess(eventInfo_t *info, uint8_t *data, uint32_t len)
             case WIFI_DISCON_M2M:
                 break;
             case WIFI_RSSI:
+                #if EN_DEBUG > 0
                 printf("RSSI %d\r\n", wifiData->rssi);
+                #endif
                 break;
             default:
                 break;
@@ -229,7 +242,7 @@ int8_t uartWrite(uint8_t *buf, uint32_t len)
         return -1;
     }
 
-#ifdef PROTOCOL_DEBUG
+#if EN_DEBUG > 0
     GIZWITS_LOG("MCU2WiFi[%4d:%4d]: ", gizwitsGetTimerCount(), len);
 #endif
     
@@ -239,12 +252,12 @@ int8_t uartWrite(uint8_t *buf, uint32_t len)
         //Loop until the end of transmission
         while (USART_GetFlagStatus(UART, USART_FLAG_TXE) == RESET);
         
-#ifdef PROTOCOL_DEBUG
+#if EN_DEBUG > 0
         GIZWITS_LOG("%02x ", buf[i]);
 #endif
     }
     
-#ifdef PROTOCOL_DEBUG
+#if EN_DEBUG > 0
     GIZWITS_LOG("\r\n");
 #endif
     

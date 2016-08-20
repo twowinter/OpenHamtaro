@@ -12,7 +12,9 @@ void DalRbCreate(dal_rb_t* rb)
 {
     if(NULL == rb)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: input rb is NULL\r\n");
+        #endif
         return;
     }
 
@@ -24,7 +26,9 @@ void DalRbDelete(dal_rb_t* rb)
 {
     if(NULL == rb)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: input rb is NULL\r\n");
+        #endif
         return;
     }
 
@@ -38,7 +42,9 @@ size_t DalRbCapacity(dal_rb_t *rb)
 {
     if(NULL == rb)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: input rb is NULL\r\n");
+        #endif
         return -1;
     }
 
@@ -49,7 +55,9 @@ size_t DalRbCanRead(dal_rb_t *rb)
 {
     if(NULL == rb)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: input rb is NULL\r\n");
+        #endif
         return -1;
     }
 
@@ -70,7 +78,9 @@ size_t DalRbCanWrite(dal_rb_t *rb)
 {
     if(NULL == rb)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: input rb is NULL\r\n");
+        #endif
         return -1;
     }
 
@@ -83,13 +93,17 @@ size_t DalRbRead(dal_rb_t *rb, void *data, size_t count)
 
     if(NULL == rb)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: input rb is NULL\r\n");
+        #endif
         return -1;
     }
 
     if(NULL == data)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: input data is NULL\r\n");
+        #endif
         return -1;
     }
 
@@ -126,19 +140,25 @@ size_t DalRbWrite(dal_rb_t *rb, const void *data, size_t count)
 
     if(NULL == rb)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: rb is empty \r\n");
+        #endif
         return -1;
     }
 
     if(NULL == data)
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: data is empty \r\n");
+        #endif
         return -1;
     }
 
     if (count >= DalRbCanWrite(rb))
     {
+        #if EN_DEBUG > 0
         GIZWITS_LOG("ERROR: no memory %d \r\n", DalRbCanWrite(rb));
+        #endif
         return -1;
     }
 

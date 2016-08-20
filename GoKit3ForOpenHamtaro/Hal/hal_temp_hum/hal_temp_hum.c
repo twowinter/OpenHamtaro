@@ -217,8 +217,8 @@ uint8_t dht11Init(void)
     dht11Rst(); 
     
     memset((uint8_t *)&temphumTypedef, 0, sizeof(thTypedef_t)); 
-    
+    #if EN_DEBUG > 0
     printf("dh11Init \r\n"); 
-    
+    #endif
     return dht11Check(); 
 }

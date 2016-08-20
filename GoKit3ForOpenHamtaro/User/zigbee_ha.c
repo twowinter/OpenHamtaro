@@ -249,6 +249,18 @@ static void Conver_RGB_To_xyY(uint8_t R, uint8_t G, uint8_t B, uint16_t *XX, uin
     *YY = (uint16_t) (y*65536);
 }
 
+
+/*
+
+On:     FE 0B 29 00 08 FF FF 08 06 00 04 02 01 00 01 29 
+Off:    FE 0B 29 00 08 FF FF 08 06 00 04 02 01 01 00 00 
+Red:    FE 0B 29 00 08 FF FF 08 06 00 04 02 01 02 01 2B 
+Yellow: FE 11 29 00 08 FF FF 08 00 03 0A 02 01 03 07 58 6B 58 81 00 00 CD 
+Pink:   FE 11 29 00 08 FF FF 08 00 03 0A 02 01 04 07 2D 9E 74 54 00 00 7E 
+Purple: FE 11 29 00 08 FF FF 08 00 03 0A 02 01 05 07 E1 96 52 4D 00 00 37 
+
+*/
+
 void ZB_HA_LightControl(ZB_LIGHT_CMD_T *cmd)
 {
     uint8_t data[200] = {0x08, 0xFF, 0xFF, 0x08};

@@ -5,6 +5,11 @@ Hello!
 
 ## 1. 更新日志  
 
+2016-08-20 作者：twowinter  
+更新信息：  
+1.关闭调试信息；  
+2.测试ZB API正常；  
+
 2016-08-19 作者：twowinter  
 更新信息：  
 1.增加zigbeeHA的发送和接收处理；//见ZB_HA_LightControl()/GetDataFromBuf()   
