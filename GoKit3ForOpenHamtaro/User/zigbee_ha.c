@@ -205,7 +205,7 @@ static int8_t UartSendPack(uint16_t cmd, uint8_t *pData, uint8_t len)
 		sendLen += len;
 	}
 
-    s_zcb.txFrame[sendLen++] = UartCalcFCS(&s_zcb.txFrame[2], len + 3);
+    s_zcb.txFrame[sendLen++] = UartCalcFCS(&s_zcb.txFrame[1], len + 3);
     
     for (i = 0; i < sendLen; i++) {
         uart1SendData(s_zcb.txFrame[i]);
@@ -252,12 +252,12 @@ static void Conver_RGB_To_xyY(uint8_t R, uint8_t G, uint8_t B, uint16_t *XX, uin
 
 /*
 
-On:     FE 0B 29 00 08 FF FF 08 06 00 04 02 01 00 01 29 
-Off:    FE 0B 29 00 08 FF FF 08 06 00 04 02 01 01 00 00 
-Red:    FE 0B 29 00 08 FF FF 08 06 00 04 02 01 02 01 2B 
-Yellow: FE 11 29 00 08 FF FF 08 00 03 0A 02 01 03 07 58 6B 58 81 00 00 CD 
-Pink:   FE 11 29 00 08 FF FF 08 00 03 0A 02 01 04 07 2D 9E 74 54 00 00 7E 
-Purple: FE 11 29 00 08 FF FF 08 00 03 0A 02 01 05 07 E1 96 52 4D 00 00 37 
+On:     FE 0B 29 00 08 FF FF 08 06 00 04 02 01 00 01 22 
+Off:    FE 0B 29 00 08 FF FF 08 06 00 04 02 01 01 00 02 
+On(White):FE 0B 29 00 08 FF FF 08 06 00 04 02 01 02 01 20 
+Yellow: FE 11 29 00 08 FF FF 08 00 03 0A 02 01 03 07 58 6B 58 81 00 00 DC 
+Pink:   FE 11 29 00 08 FF FF 08 00 03 0A 02 01 04 07 2D 9E 74 54 00 00 A2 
+Purple: FE 11 29 00 08 FF FF 08 00 03 0A 02 01 05 07 E1 96 52 4D 00 00 58 
 
 */
 
