@@ -42,10 +42,10 @@ GoKit3+仓鼠玩偶
 ### 功能演示视频  
 
 严肃演示版视频(锤子T1闪亮出境)：    
-![](http://static.video.qq.com/TPout.swf?vid=z0324xe9wtm&auto=0)
+[http://v.qq.com/x/page/z0324xe9wtm.html](http://v.qq.com/x/page/z0324xe9wtm.html)
 
 语音调戏版视频(仓鼠管家抽风特写)：  
-![](http://static.video.qq.com/TPout.swf?vid=p0324kjqakq&auto=0)
+[http://v.qq.com/x/page/p0324kjqakq.html](http://v.qq.com/x/page/p0324kjqakq.html)
 
 ## 总体设计方案  
 
