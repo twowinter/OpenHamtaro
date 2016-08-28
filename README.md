@@ -5,11 +5,11 @@
 
 前段时间给多多买了个语音仓鼠玩具，主要功能就是你说一句，它重复一句，里头有个电机，讲话的时候电机跟着转动，相当于自带抽风效果。多多特别喜欢，整天抓在手里又亲又咬，仓鼠一抽风，她也乐地抽风。后来仓鼠坏掉了，怎么叫都叫不醒，多多以为是开关没打开，我跟她解释说仓鼠坏掉了，她听不懂，一直拉着我的手往底座去拨开关，让人怜惜。
 
-![](http://7xkqvo.com1.z0.glb.clouddn.com/open_hamtaro.jpg)
-
 机智云Cherry从CSDN联系到我说要赠送一个GoKit3的时候，我很开心，很早就知道它支持语音识别，我脑海中蹦出的想法就是利用Gokit3给闺女的仓鼠玩具做个大换血。记得5月的时候，周杰伦随手就给女儿写了首歌《前世情人》，让我嫉妒不已，老婆鼓励我说“会写代码的爸爸同样牛逼”。这次我也终于能够得偿所愿，给多多写段代码了。
 
 这就是这个开源项目的由来。
+
+![](http://7xkqvo.com1.z0.glb.clouddn.com/open_hamtaro_kiss_ok.jpg)  
 
 ## 项目介绍
 OpenHamtaro是一个以仓鼠玩偶为原型的语音机器人项目，具备语音交互能力，可与不同品牌的ZigBee智能家居产品互联互通。项目希望通过开源方式，集合大家的力量，一起打造一个开放自由的智能家居网络，让大家可以挑选喜欢的设备进入个人生活。
@@ -31,12 +31,21 @@ Apple有Siri，Google有Goolge Now，你说“OK glass”可以与谷歌眼镜�
 ## 一期项目成果展示  
 
 ### 原型照片  
-待拍摄。  
+
+GoKit3+仓鼠玩偶  
+![](http://7xkqvo.com1.z0.glb.clouddn.com/open_hamtaro_prototype_ok.jpg)    
+
+飞利浦HUE闪亮登场，感谢领导大力支持。  
+![](http://7xkqvo.com1.z0.glb.clouddn.com/open_hamtaro_hue.jpg)   
+
 
 ### 功能演示视频  
-待补充。价值1588元的飞利浦HUE套装，还在飞来的路上。  
 
+严肃演示版视频(锤子T1闪亮出境)：    
+![](http://static.video.qq.com/TPout.swf?vid=z0324xe9wtm&auto=0)
 
+语音调戏版视频(仓鼠管家抽风特写)：  
+![](http://static.video.qq.com/TPout.swf?vid=p0324kjqakq&auto=0)
 
 ## 总体设计方案  
 
