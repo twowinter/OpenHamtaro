@@ -31,9 +31,12 @@
 
 #define EN_HAM  1
 
-
+#if EN_HAM > 0
+#define PRODUCT_KEY "efea64cc739c4c68bee4fc6826b1762e" // "your_product_key"
+#else
 //custom
 #define PRODUCT_KEY "your_product_key"
+#endif
 
 #define LED_ONOFF_DEFAULT 0
 #define LED_COLOR_DEFAULT 0

@@ -881,10 +881,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>0</ColumnNumber>
+      <ColumnNumber>5</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>139</TopLine>
-      <CurrentLine>142</CurrentLine>
+      <TopLine>60</TopLine>
+      <CurrentLine>65</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\Dal\dal_rb.c</PathWithFileName>
       <FilenameWithoutPath>dal_rb.c</FilenameWithoutPath>

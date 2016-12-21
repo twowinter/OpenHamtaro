@@ -96,10 +96,11 @@ void motorInit(void)
     motorStatus(0);
 }
 
-
+// 7199 100
+// x     M
 void motorControl(uint8_t m1,uint8_t m2)
 {
-    u16 temp = (MOTOR_ARR+1) / MOTOR_MAX;
+    u16 temp = 7200/100;//(MOTOR_ARR+1) / MOTOR_MAX;
 
     TIM_SetCompare1(TIM3,m1*temp);	//m1
     TIM_SetCompare2(TIM3,m2*temp);	//m4
